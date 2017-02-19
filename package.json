@@ -4,7 +4,7 @@
   "description": "A JavaScript simulator for the WW2 German encryption machine, the Enigma",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/rotor.test.js"
+    "test": "mocha"
   },
   "keywords": [
     "javascript",

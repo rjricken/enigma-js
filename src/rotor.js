@@ -54,4 +54,4 @@ EnigmaRotor.M3_ARMY_IV = function (initialPosition) {
    return EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
 }
 
-module.exports = EnigmaRotor;
+module.exports = { ALPHABETS, EnigmaRotor };

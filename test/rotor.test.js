@@ -1,13 +1,13 @@
 'use strict';
 
-const LATIN_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const M3_ARMY_IV_ALPHABET = 'ESOVPZJAYQUIRHXLNFTGKDCMWB';
-
 const expect = require('chai').expect;
-const EnigmaRotor = require('../src/rotor.js');
+const EnigmaRotor = require('../src/rotor.js').EnigmaRotor;
+const ALPHABETS = require('../src/rotor.js').ALPHABETS;
 
+const LATIN_ALPHABET = ALPHABETS.LATIN;
+const M3_ARMY_IV_ALPHABET = ALPHABETS.M3_ARMY_IV;
 
-describe('Enigma.Rotor', function() {
+describe('EnigmaRotor', function() {
 
    it('should encode/decode letters according to substitution alphabet', function() {
       const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
@@ -43,7 +43,14 @@ describe('Enigma.Rotor', function() {
       expect(rotor.encode(LATIN_ALPHABET[0])).to.equal(M3_ARMY_IV_ALPHABET[0]);
    });
 
-   it('should expose a preconfigured M3 Army rotor #IV', function() {
+   it('should create rotor with initial position set', function() {
+      const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
+      let rotor = EnigmaRotor(substitutionAlphabet, 10);
+
+      expect(rotor.encode(LATIN_ALPHABET[0])).to.equal(M3_ARMY_IV_ALPHABET[10]);
+   });
+
+   it('should create rotor with preconfigured alphabet', function() {
       const m3ArmyIV = EnigmaRotor.M3_ARMY_IV(0);
 
       expect(m3ArmyIV.encode(LATIN_ALPHABET[0])).to.equal(M3_ARMY_IV_ALPHABET[0]);
