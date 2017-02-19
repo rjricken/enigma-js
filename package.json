@@ -1,0 +1,19 @@
+{
+  "name": "enigma-js",
+  "version": "0.1.0",
+  "description": "A JavaScript simulator for the WW2 German encryption machine, the Enigma",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/rotor.test.js"
+  },
+  "keywords": [
+    "javascript",
+    "cryptography"
+  ],
+  "author": "Ricardo J Ricken <ricardoricken@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
