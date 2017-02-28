@@ -16,7 +16,7 @@ function EnigmaReflector(mappings) {
 
 EnigmaReflector.prototype.flip = function(letter) {
    return this.pairMappings.get(letter);
-}
+};
 
 EnigmaReflector.M3_ARMY_NAVY_D = new EnigmaReflector(MAPPINGS.M3_ARMY_NAVY_D);
 

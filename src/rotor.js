@@ -22,23 +22,23 @@ function mappedLetterIndex(alphabet, letter, relativeOffset) {
 
 EnigmaRotor.prototype.encode = function(letter) {
    return this.alphabet[mappedLetterIndex(ALPHABETS.LATIN, letter, this.currentOffset)];
-}
+};
 
 EnigmaRotor.prototype.decode = function(letter) {
    return ALPHABETS.LATIN[mappedLetterIndex(this.alphabet, letter, -this.currentOffset)];
-}
+};
 
 EnigmaRotor.prototype.rotate = function(numberOfTimes = 1) {
    this.currentOffset = (this.currentOffset + numberOfTimes) % this.alphabet.length;
-}
+};
 
 EnigmaRotor.prototype.connectTo = function(rotorToTheLeft) {
    this.connectingRotor = rotorToTheLeft;
-}
+};
 
 //TODO: refactor this
 EnigmaRotor.M3_ARMY_IV = function (initialPosition) {
    return new EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
-}
+};
 
 module.exports = { ALPHABETS, EnigmaRotor };

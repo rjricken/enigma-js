@@ -18,6 +18,8 @@ describe('EnigmaScrambler', function() {
                .to.equal(ALPHABETS.M3_ARMY_IV[i % ALPHABETS.M3_ARMY_IV.length]);
          }
       });
-   })
+   });
+
+   
    
 });
