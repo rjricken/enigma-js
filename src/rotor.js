@@ -9,49 +9,35 @@ const ALPHABETS = {
    M3_ARMY_V:    'VZBRGITYUPSDNHLXAWMJQOFECK'
 };
 
-function EnigmaRotor(substitutionAlphabet, initialPosition) {
-   let alphabet = substitutionAlphabet;
-   let encDict = {};
-   let decDict = {};   
+//TODO: build a dictionary with indices of each letter of the alphabet for encode/decode
 
-   initialPosition ? rotate(initialPosition) : init();
+function EnigmaRotor(substitutionAlphabet, initialPositionIndex = 0) {
+   this.alphabet = substitutionAlphabet;
+   this.currentOffset = initialPositionIndex;
+}
 
-   function init() {
-      encDict = buildDictionary(ALPHABETS.LATIN, alphabet);
-      decDict = buildDictionary(alphabet, ALPHABETS.LATIN);
-   }
+function mappedLetterIndex(alphabet, letter, relativeOffset) {
+   return (alphabet.indexOf(letter) + relativeOffset) % alphabet.length;
+}
 
-   function buildDictionary(keys, values) {
-      let result = {};
+EnigmaRotor.prototype.encode = function(letter) {
+   return this.alphabet[mappedLetterIndex(ALPHABETS.LATIN, letter, this.currentOffset)];
+}
 
-      for (let index in keys) {
-         result[keys[index]] = values[index];
-      }
+EnigmaRotor.prototype.decode = function(letter) {
+   return ALPHABETS.LATIN[mappedLetterIndex(this.alphabet, letter, -this.currentOffset)];
+}
 
-      return result;
-   }
+EnigmaRotor.prototype.rotate = function(numberOfTimes = 1) {
+   this.currentOffset = (this.currentOffset + numberOfTimes) % this.alphabet.length;
+}
 
-   function encode(letter) {
-      return encDict[letter];
-   };
-
-   function decode(letter) {
-      return decDict[letter];
-   }
-
-   function rotate(numberOfTimes) {
-      numberOfTimes = numberOfTimes || 1;
-      let shifts = numberOfTimes % substitutionAlphabet.length;
-
-      alphabet = alphabet.slice(shifts).concat(alphabet.slice(0, shifts));
-      init();
-   };
-
-   return { encode, decode, rotate };
+EnigmaRotor.prototype.connectTo = function(rotorToTheLeft) {
+   this.connectingRotor = rotorToTheLeft;
 }
 
 EnigmaRotor.M3_ARMY_IV = function (initialPosition) {
-   return EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
+   return new EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
 }
 
 module.exports = { ALPHABETS, EnigmaRotor };

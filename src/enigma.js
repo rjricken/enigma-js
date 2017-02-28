@@ -1,6 +1,7 @@
 'use strict';
 
-const EnigmaRotor = require('./rotor.js');
+const EnigmaRotor = require('./rotor.js').EnigmaRotor;
+const EnigmaReflector = require('./reflector.js').EnigmaReflector;
 
 function Enigma (rotorOrder, rotorSettings, plugboardPairs) {
    let self = this;
@@ -18,8 +19,10 @@ function Enigma (rotorOrder, rotorSettings, plugboardPairs) {
    self.encrypt = function (plaintext) {
       let cyphertext = '';
 
-      for (let a in plaintext) {
-         cyphertext += encryptLetter(a);
+      for (let index in plaintext) {
+         //cyphertext += encryptLetter(a);
+         plainLetter = plaintext[index];
+         
       }
 
       return cyphertext;
