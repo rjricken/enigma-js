@@ -36,11 +36,15 @@ describe('EnigmaRotor', function() {
       const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
       let rotor = new EnigmaRotor(substitutionAlphabet);
 
-      for (let i = 0; i < 26; i += 1) {
+      for (let i = 0; i < 52; i += 1) {
          rotor.rotate();
+
+         const expectedLetter = M3_ARMY_IV_ALPHABET[(i + 1) % M3_ARMY_IV_ALPHABET.length];
          
          expect(rotor.encode(LATIN_ALPHABET[0]))
-            .to.equal(M3_ARMY_IV_ALPHABET[(i + 1) % M3_ARMY_IV_ALPHABET.length]);
+            .to.equal(expectedLetter);
+
+         expect(rotor.decode(expectedLetter)).to.equal(LATIN_ALPHABET[0]);
       }
 
       expect(rotor.encode(LATIN_ALPHABET[0])).to.equal(M3_ARMY_IV_ALPHABET[0]);

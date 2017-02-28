@@ -16,8 +16,15 @@ function EnigmaRotor(substitutionAlphabet, initialPositionIndex = 0) {
    this.currentOffset = initialPositionIndex;
 }
 
+/**
+ * Computes the mapped index of a letter based on the alphabet and its current (rotor rotation) offset.
+ * @param alphabet - the source alphabet
+ * @param letter - the source letter
+ * @param relativeOffset - a signed number expressing the offset relative to encoding or decoding
+ * @return the index of the source letter mapped to the target alphabet
+ */
 function mappedLetterIndex(alphabet, letter, relativeOffset) {
-   return (alphabet.indexOf(letter) + relativeOffset) % alphabet.length;
+   return (alphabet.length + alphabet.indexOf(letter) + relativeOffset) % alphabet.length;
 }
 
 EnigmaRotor.prototype.encode = function(letter) {
