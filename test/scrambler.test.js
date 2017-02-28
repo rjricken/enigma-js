@@ -10,7 +10,7 @@ describe('EnigmaScrambler', function() {
       it('should scramble according to rotor settings', function() {
          const slow = EnigmaRotor.M3_ARMY_IV(0);
 
-         const scrambler = EnigmaScrambler();
+         const scrambler = new EnigmaScrambler();
          scrambler.pushRotor(slow);
 
          for (let i = 0; i < 30; i += 1) {
