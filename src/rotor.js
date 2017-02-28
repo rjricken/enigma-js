@@ -36,6 +36,7 @@ EnigmaRotor.prototype.connectTo = function(rotorToTheLeft) {
    this.connectingRotor = rotorToTheLeft;
 }
 
+//TODO: refactor this
 EnigmaRotor.M3_ARMY_IV = function (initialPosition) {
    return new EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
 }

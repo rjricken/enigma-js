@@ -10,7 +10,7 @@ const M3_ARMY_NAVY_D_MAPPING = MAPPINGS.M3_ARMY_NAVY_D;
 describe('EnigmaReflector', function() {
 
    it('should flip letters according to mapping', function() {
-      let reflector = EnigmaReflector(M3_ARMY_NAVY_D_MAPPING);
+      let reflector = new EnigmaReflector(M3_ARMY_NAVY_D_MAPPING);
 
       for (let index in ALPHABETS.LATIN) {
          let flippedLetter = reflector.flip(ALPHABETS.LATIN[index]);
