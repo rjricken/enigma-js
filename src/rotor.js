@@ -30,6 +30,10 @@ EnigmaRotor.prototype.decode = function(letter) {
 
 EnigmaRotor.prototype.rotate = function(numberOfTimes = 1) {
    this.currentOffset = (this.currentOffset + numberOfTimes) % this.alphabet.length;
+
+   if (this.connectingRotor && this.currentOffset === 0) {
+      this.connectingRotor.rotate();
+   }
 };
 
 EnigmaRotor.prototype.connectTo = function(rotorToTheLeft) {
@@ -39,6 +43,10 @@ EnigmaRotor.prototype.connectTo = function(rotorToTheLeft) {
 //TODO: refactor this
 EnigmaRotor.M3_ARMY_IV = function (initialPosition) {
    return new EnigmaRotor(ALPHABETS.M3_ARMY_IV, initialPosition);
+};
+
+EnigmaRotor.M3_ARMY_V = function (initialPosition) {
+   return new EnigmaRotor(ALPHABETS.M3_ARMY_V, initialPosition);
 };
 
 module.exports = { ALPHABETS, EnigmaRotor };

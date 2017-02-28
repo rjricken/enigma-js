@@ -11,7 +11,7 @@ describe('EnigmaRotor', function() {
 
    it('should encode/decode letters according to substitution alphabet', function() {
       const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
-      let rotor = new EnigmaRotor(substitutionAlphabet, 0);
+      let rotor = new EnigmaRotor(substitutionAlphabet);
 
       for (let index in LATIN_ALPHABET) {
          let encoded = rotor.encode(LATIN_ALPHABET[index]);
@@ -23,7 +23,7 @@ describe('EnigmaRotor', function() {
 
    it('should rotate the alphabet one position', function() {
       const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
-      let rotor = new EnigmaRotor(substitutionAlphabet, 0);
+      let rotor = new EnigmaRotor(substitutionAlphabet);
 
       rotor.rotate();
       let encoded = rotor.encode(LATIN_ALPHABET[0]);
@@ -34,7 +34,7 @@ describe('EnigmaRotor', function() {
 
    it('should rotate the alphabet back into its original position', function() {
       const substitutionAlphabet = M3_ARMY_IV_ALPHABET;
-      let rotor = new EnigmaRotor(substitutionAlphabet, 0);
+      let rotor = new EnigmaRotor(substitutionAlphabet);
 
       for (let i = 0; i < 26; i += 1) {
          rotor.rotate();
