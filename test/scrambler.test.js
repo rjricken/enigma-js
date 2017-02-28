@@ -18,6 +18,8 @@ describe('EnigmaScrambler', function() {
          for (let i = 0; i < 30; i += 1) {
             expect(scrambler.scramble(ALPHABETS.LATIN[0]))
                .to.equal(ALPHABETS.M3_ARMY_IV[i % ALPHABETS.M3_ARMY_IV.length]);
+
+            scrambler.advance();
          }
       });
 
@@ -30,6 +32,7 @@ describe('EnigmaScrambler', function() {
 
          for (let index in plainWord) {
             cipherWord += scrambler.scramble(plainWord[index]);
+            scrambler.advance();
          }
 
          expect(cipherWord).to.equal('RBKCYCP');
@@ -57,6 +60,11 @@ describe('EnigmaScrambler', function() {
             for (let index in result) {
                expect(scrambler.scramble(ALPHABETS.LATIN[0]))
                   .to.equal(result[index]);
+
+               expect(scrambler.unscramble(result[index]))
+                  .to.equal(ALPHABETS.LATIN[0]);
+
+               scrambler.advance();
             }
          });
 
@@ -92,6 +100,8 @@ describe('EnigmaScrambler', function() {
             for (let index in result) {
                expect(scrambler.scramble(ALPHABETS.LATIN[0]))
                   .to.equal(result[index]);
+
+               scrambler.advance();
             }
          });
       });
