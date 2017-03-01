@@ -5,8 +5,30 @@ const EnigmaScrambler = require('../src/scrambler.js');
 const EnigmaRotor = require('../src/rotor.js').EnigmaRotor;
 const ALPHABETS = require('../src/rotor.js').ALPHABETS;
 
-describe('EnigmaScrambler', function() {
+function encodeWord(scrambler, word) {
+   let cipherWord = '';
 
+   for (let index in word) {
+      cipherWord += scrambler.scramble(word[index]);
+      scrambler.advance();
+   }
+
+   return cipherWord;
+}
+
+function decodeWord(scrambler, cipherWord) {
+   let plainWord = '';
+
+   for (let index in cipherWord) {
+      plainWord += scrambler.unscramble(cipherWord[index]);
+      scrambler.advance();
+   }
+
+   return plainWord;
+}
+
+describe('EnigmaScrambler', function() {
+   
    describe('<1 rotor>', function() {
 
       it('should scramble same letter according to rotor settings', function() {
@@ -27,14 +49,7 @@ describe('EnigmaScrambler', function() {
          const scrambler = new EnigmaScrambler();
          scrambler.pushRotor(new EnigmaRotor(ALPHABETS.M3_ARMY_IV));
 
-         const plainWord = 'MYSTERY';
-         let cipherWord = '';
-
-         for (let index in plainWord) {
-            cipherWord += scrambler.scramble(plainWord[index]);
-            scrambler.advance();
-         }
-
+         const cipherWord = encodeWord(scrambler, 'MYSTERY');
          expect(cipherWord).to.equal('RBKCYCP');
       });
 
@@ -74,27 +89,18 @@ describe('EnigmaScrambler', function() {
 
    describe('<3 rotors>', function() {
 
+      function createScrambler(alphabets) {
+         let scrambler = new EnigmaScrambler();
+         alphabets.forEach(alphabet => scrambler.pushRotor(new EnigmaRotor(alphabet)));
+
+         return scrambler;
+      }
+
       it('should scramble same letter according to rotor settings', function() {
-         const first = new EnigmaRotor(ALPHABETS.ENIGMAI_III);
-         const second = new EnigmaRotor(ALPHABETS.M3_ARMY_IV);
-         const third = new EnigmaRotor(ALPHABETS.M3_ARMY_V);
+         const alphabets = [ALPHABETS.ENIGMAI_III, ALPHABETS.M3_ARMY_IV, ALPHABETS.M3_ARMY_V];
+         const scrambler = createScrambler(alphabets);
 
-         const scrambler = new EnigmaScrambler();
-         scrambler.pushRotor(first);
-         scrambler.pushRotor(second);
-         scrambler.pushRotor(third);
-
-         /*
-            LATIN:        'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-
-            M3_ARMY_V:    'VZBRGITYUPSDNHLXAWMJQOFECK'
-            M3_ARMY_IV:   'ESOVPZJAYQUIRHXLNFTGKDCMWB',
-            ENIGMAI_III:  'BDFHJLCPRTXVZNYEIWGAKMUSQO',
-         */
-
-         const expectedResultSets = [
-            'HDGLTQC'
-         ];
+         const expectedResultSets = ['HDGLTQCUXVAMPBRZJFWINSOEYK'];
 
          expectedResultSets.forEach(result => {
             for (let index in result) {
@@ -104,6 +110,19 @@ describe('EnigmaScrambler', function() {
                scrambler.advance();
             }
          });
+      });
+
+      it('should scramble a word according to rotor settings', function() {
+         const alphabets = [ALPHABETS.ENIGMAI_III, ALPHABETS.M3_ARMY_IV, ALPHABETS.M3_ARMY_V];
+         const scrambler = createScrambler(alphabets);
+
+         let cipherWord = encodeWord(scrambler, 'ANOMALY');
+         expect(cipherWord).to.equal('HRJZTJT');
+
+         const unscrambler = createScrambler(alphabets);
+         let plainWord = decodeWord(unscrambler, cipherWord);
+
+         expect(plainWord).to.equal('ANOMALY');
       });
       
    });

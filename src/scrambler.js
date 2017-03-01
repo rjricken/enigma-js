@@ -27,15 +27,9 @@ EnigmaScrambler.prototype.scramble = function(letter) {
 
 EnigmaScrambler.prototype.unscramble = function(letter) {
    let unscrambledLetter = letter;
-   //console.log("Unscrambling ", letter);
    
    this.spindle.forEach(rotor => {
-      //console.log('Alphabet: ', rotor.alphabet.slice(rotor.currentOffset).concat(rotor.alphabet.slice(0, rotor.currentOffset)));
-      //console.log('Offset: ', rotor.currentOffset);
-
       unscrambledLetter = rotor.decode(unscrambledLetter);
-      //console.log(" > intermediate step: ", unscrambledLetter);
-
    });
 
    return unscrambledLetter;
