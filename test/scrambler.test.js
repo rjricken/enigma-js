@@ -93,7 +93,7 @@ describe('EnigmaScrambler', function() {
          */
 
          const expectedResultSets = [
-            'HDGLTQ'
+            'HDGLTQC'
          ];
 
          expectedResultSets.forEach(result => {
